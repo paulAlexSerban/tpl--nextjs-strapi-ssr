@@ -1,0 +1,43 @@
+---
+name: Lint Scripts
+on:
+  push:
+    branches-ignore:
+      - release
+      - main
+      - develop
+  workflow_call:
+
+jobs:
+  lint:
+    name: Lint Scripts
+    runs-on: ubuntu-latest
+    steps:
+      - name: "📥 Checkout repository"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: "🔍  Verify Changed .bash or .sh files"
+        uses: tj-actions/changed-files@v23.1
+        id: changed-bash-files
+        with:
+          files: |
+              *.bash
+              *.sh
+              **/*.bash
+              **/*.sh
+
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-bash-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+      
+      - name: "🧪  Lint Bash Script with ShellCheck"
+        if: steps.changed-bash-files.outputs.any_changed == 'true'
+        uses: azohra/shell-linter@latest
+        with:
+          path: |
+            ./**/*.bash
+            ./**/*.sh
