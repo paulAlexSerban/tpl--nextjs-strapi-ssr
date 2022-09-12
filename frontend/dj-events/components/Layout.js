@@ -16,7 +16,7 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name="keywords" content="{keywords}" />
       </Head>
       <Header />
-      {router.pathname === '/' ?? <Showcase />} {/* 1 */}
+      {router.pathname === '/' && <Showcase />} {/* 1 */}
       <div className={styles.layout__container}>{children}</div>
       <Footer />
     </div>
