@@ -1,12 +1,20 @@
-import Layout from '@/components/Layout';
-import { API_URL } from '@/config/index';
+import Layout from "@/components/Layout";
+import { API_URL } from "@/config/index";
+import EventItem from "@/components/EventItem";
+import Link from 'next/link';
 
 // all the logic in here is on the FE
-export default function HomePage({events}) {
-  console.log({events})
+export default function HomePage({ events }) {
   return (
     <Layout>
       <h1>Upcoming Events</h1>
+      {events.length === 0 && <h3>No events to show</h3>}
+      {events.map((evt) => <EventItem key={evt.id} evt={evt}/>)}
+      {events.length > 0 && (
+        <Link href='/events'>
+          <a className="btn-secondary">View all events</a>
+        </Link>
+      )}
     </Layout>
   );
 }
@@ -17,9 +25,9 @@ export async function getStaticProps() {
   const events = await res.json();
 
   return {
-    props: {events},
+    props: { events: events.slice(0, 3) },
     revalidate: 1
-  }
+  };
 }
 
 /**
