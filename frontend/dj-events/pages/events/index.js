@@ -16,8 +16,9 @@ export default function EventsPage({ events }) {
 
 // all the logic that starts here is on the BE
 export async function getServerSideProps() {
-  const res = await fetch(`${API_URL}/api/events`);
-  const events = await res.json();
+  const res = await fetch(`${API_URL}/api/events?_sort=date:ASC&[populate]=*`);
+  const json = await res.json();
+  const events = json.data
 
   return {
     props: { events }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 // all the logic in here is on the FE
 export default function HomePage({ events }) {
+  console.log(events)
   return (
     <Layout>
       <h1>Upcoming Events</h1>
@@ -21,11 +22,12 @@ export default function HomePage({ events }) {
 
 // all the logic that starts here is on the BE
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/api/events`);
-  const events = await res.json();
+  const res = await fetch(`${API_URL}/api/events?_sort=date:ASC&_limit=3&[populate]=*`);
+  const json = await res.json();
+  const events = json.data
 
   return {
-    props: { events: events.slice(0, 3) },
+    props: { events },
     revalidate: 1
   };
 }
