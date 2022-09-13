@@ -2,5 +2,5 @@
 # makes sure the folder containing the script will be the root folder
 cd "$(dirname "$0")" || exit
 
-echo "👀  Watching Next.js DJ Events" 
-npm --prefix ../frontend/dj-events run develop
+echo "👀  Watching Strapi DJ Events" 
+npm --prefix ../backend/dj-events run develop
