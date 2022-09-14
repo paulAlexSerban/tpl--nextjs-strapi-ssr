@@ -5,6 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaPencilAlt, FaTimes } from "react-icons/fa";
 
+/**
+ * @name: Event Showcase
+ * @type: Page
+ */
+
 export default function EventPage({ evt }) {
   const deleteEvent = () => {
     console.log("delete");
