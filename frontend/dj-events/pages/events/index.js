@@ -2,6 +2,11 @@ import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
 import EventItem from "@/components/EventItem";
 
+/**
+ * @name: Events List
+ * @type: Page
+ */
+
 // all the logic in here is on the FE
 export default function EventsPage({ events }) {
   return (
