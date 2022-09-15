@@ -4,7 +4,7 @@ import styles from '@/styles/eventItem.module.scss';
 
 export default function EventItem({evt}) {
   const { attributes } = evt;
-  const image = attributes.image.data.attributes.formats.thumbnail.url;
+  const image = attributes.image.data && attributes.image.data.attributes.formats.thumbnail.url;
 
   return (
     <div className={styles.event}>
