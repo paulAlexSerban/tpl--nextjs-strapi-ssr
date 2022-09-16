@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "id": "5",
+      "name": "UnMute Rock Festival",
+      "slug": "unmute-rock-festival",
+      "venue": "Studio 54",
+      "address": "55 La Salle St #12K New York, New York(NY), 10027",
+      "performers": "Big Wednesday, Black Pyre, Calling Apollo",
+      "date": "June 30, 2021",
+      "time": "8:00 PM EST",
+      "description": "With bands from around the UK ready to send the roof into orbit, get ready for the loudest Welsh festival: the inaugural UnMute 2021.",
+      "image": "/images/sample/event5.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Soul Kitchen Party",
+      "slug": "soul-kitchen-party",
+      "venue": "Onyx Club",
+      "address": "60 Gramercy Park N #2 New York, New York(NY), 10010",
+      "performers": "A-Trak, Nightmares on Wax, Rakim, Jay Electronica",
+      "date": "July 2, 2021",
+      "time": "8:00 PM EST",
+      "description": "Dope party which features Hip Hop legends, emerging artists and world-class turntablists",
+      "image": "/images/sample/event6.jpg"
+    }
+  ]
+}
