@@ -4,89 +4,87 @@ import styles from "@/styles/event.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { FaPencilAlt, FaTimes } from "react-icons/fa";
+import 'react-toastify/dist/ReactToastify.css';
+import { parseCookies } from '@/helpers/index';
+import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from 'next/router';
+
+/**
+ * @name: Event Showcase
+ * @type: Page
+ */
 
 export default function EventPage({ evt }) {
-  const deleteEvent = () => {
-    console.log("delete");
+  const { attributes } = evt;
+  
+  const router = useRouter();
+
+  const deleteEvent = async (e) => {
+    e.preventDefault();
+    if(confirm('Are you sure ?')) {
+      const res = await fetch(`${API_URL}/api/events/${evt.id}`, {
+        method: "DELETE"
+      });
+
+      const data = await res.json();
+
+      if(!res.ok) {
+        toast.error(data.message)
+      } else {
+        router.push('/events')
+      }
+    }
   };
+  
+  const image = attributes.image.data && attributes.image.data.attributes.formats.medium.url;
 
   return (
     <Layout title="Single event">
       <div className={styles.event}>
         <div className={styles.controls}>
-          <Link href={`/events/edit/${evt.id}`}>
+          <Link href={`/events/edit/${attributes.id}`}>
             <a>
               <FaPencilAlt /> Edit Event
             </a>
           </Link>
-          <a href="#" className={styles.delete} onClick={deleteEvent}>
+          <a className={styles.delete} onClick={deleteEvent}>
             <FaTimes /> Delete Event
           </a>
         </div>
         <span>
-          {evt.date} at {evt.time}
+          {new Date(attributes.date).toLocaleDateString('en-US')} at {attributes.time}
         </span>
-        <h1>{evt.name}</h1>
-        {evt.image && (
+        <h1>{attributes.name}</h1>
+        <ToastContainer />
+        {attributes.image && (
           <div className={styles.image}>
-            <Image src={evt.image} width={960} height={600} />
+            <Image src={ image ? image : '/images/event-default.png'} width={960} height={600} />
           </div>
         )}
         <h3>Performers:</h3>
-        <p>{evt.performers}</p>
+        <p>{attributes.performers}</p>
         <h3>Description:</h3>
-        <p>{evt.description}</p>
-        <h3>Venue: {evt.venue}</h3>
-        <p>{evt.address}</p>
+        <p>{attributes.description}</p>
+        <h3>Venue: {attributes.venue}</h3>
+        <p>{attributes.address}</p>
 
-        <Link href='/events' >
-          <a className={styles.back}>
-            {'<'} Go Back
-          </a>
+        <Link href="/events">
+          <a className={styles.back}>{"<"} Go Back</a>
         </Link>
       </div>
     </Layout>
   );
 }
 
-// for Server-Side Generation
-export async function getStaticPaths() {
-  const res = await fetch(`${API_URL}/api/events`);
-  const events = await res.json();
-  const paths = events.map((evt) => ({
-    params: { slug: evt.slug },
-  }));
-  return {
-    paths,
-    fallback: false, // (1)
-  };
-}
-
-/**
- * @notes
- * 1. false is recommended for SSG, true is for SSR
- */
-
-export async function getStaticProps({ params: { slug } }) {
+// for Server-Side Rendering
+export async function getServerSideProps({query:{slug}}) {
   console.log(slug);
-  const res = await fetch(`${API_URL}/api/events/${slug}`);
-  const events = await res.json();
+  const res = await fetch(`${API_URL}/api/events?filters[slug][$eq]=${slug}&populate=*`);
+const json = await res.json();
+const events = json.data;
   return {
     props: {
-      evt: events[0],
-    },
-    revalidate: 1,
-  };
+      evt: events[0]
+    }
+  }
 }
-
-// for Server-Side Rendering
-// export async function getServerSideProps({query:{slug}}) {
-//   console.log(slug);
-//   const res = await fetch(`${API_URL}/api/events/${slug}`);
-//   const events = await res.json();
-//   return {
-//     props: {
-//       evt: events[0]
-//     }
-//   }
-// }
