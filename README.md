@@ -4,8 +4,8 @@
 - [Next.js Website](https://nextjs.org/)
 
 ## Architecture
-- FE: Next.js
-- BE: Strapi
+- FE: Next.js, Scss
+- BE: Strapi CMS
 - Database: SQl (SQL Lite and PosgresSQL)
   - Local development - SQLite
   - Remote - PostgrsSQL
