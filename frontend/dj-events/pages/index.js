@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 // all the logic in here is on the FE
 export default function HomePage({ events }) {
-  console.log(events)
   return (
     <Layout>
       <h1>Upcoming Events</h1>
