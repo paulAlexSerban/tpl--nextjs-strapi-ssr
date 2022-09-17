@@ -22,7 +22,7 @@ export default function EventPage({ evt }) {
   const deleteEvent = async (e) => {
     e.preventDefault();
     if(confirm('Are you sure ?')) {
-      const res = await fetch(`${API_URL}/api/events/${evt.id}`, {
+      const res = await fetch(`${API_URL}/api/events/${id}`, {
         method: "DELETE"
       });
 

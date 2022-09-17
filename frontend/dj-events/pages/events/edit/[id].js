@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import Image from 'next/image';
 import {FaImage} from 'react-icons/fa';
 import Modal from '@/components/Modal';
+import ImageUpload from '@/components/ImageUpload';
 /**
  * @name: Add Event
  * @type: Page
@@ -34,7 +35,8 @@ export default function EditEventPage({
     description: attributes.description,
   });
 
-  const [imagePreview, setImagePreview] = useState(attributes.image ? attributes.image.data.attributes.formats.thumbnail.url : null )
+  console.log(attributes)
+  const [imagePreview, setImagePreview] = useState(attributes.image.data ? attributes.image.data.attributes.formats.thumbnail.url : null )
   const [showModal, setShowModal] = useState(false)
 
   const router = useRouter();
@@ -64,8 +66,9 @@ export default function EditEventPage({
       }
       toast.error("Something Went Wrong");
     } else {
-      const evt = await res.json();
-      const slug = evt.data.attributes.slug;
+      const json = await res.json();
+      const data = json.data;
+      const slug = data.attributes.slug;
       router.push(`/events/${slug}`);
     }
   };
@@ -74,6 +77,15 @@ export default function EditEventPage({
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+
+  const imageUploaded = async () => {
+    const res = await fetch(`${API_URL}/api/events/${id}?[populate]=*`);
+    const json = await res.json();
+    const data = json.data
+
+    setImagePreview(data.attributes.image.data ? data.attributes.image.data.attributes.formats.thumbnail.url : null);
+    setShowModal(false);
+  }
 
   return (
     <Layout title="Edit Event">
@@ -141,7 +153,7 @@ export default function EditEventPage({
       </div>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        IMAGE UPLOAD
+        <ImageUpload evtId={id}  imageUploaded={imageUploaded}/>
       </Modal>
     </Layout>
   );
