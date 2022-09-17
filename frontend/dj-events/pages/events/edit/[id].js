@@ -35,7 +35,6 @@ export default function EditEventPage({
     description: attributes.description,
   });
 
-  console.log(attributes)
   const [imagePreview, setImagePreview] = useState(attributes.image.data ? attributes.image.data.attributes.formats.thumbnail.url : null )
   const [showModal, setShowModal] = useState(false)
 
