@@ -15,14 +15,14 @@ import { useRouter } from 'next/router';
  */
 
 export default function EventPage({ evt }) {
-  const { attributes } = evt;
+  const { attributes, id } = evt;
   
   const router = useRouter();
 
   const deleteEvent = async (e) => {
     e.preventDefault();
     if(confirm('Are you sure ?')) {
-      const res = await fetch(`${API_URL}/api/events/${evt.id}`, {
+      const res = await fetch(`${API_URL}/api/events/${id}`, {
         method: "DELETE"
       });
 
@@ -37,12 +37,12 @@ export default function EventPage({ evt }) {
   };
   
   const image = attributes.image.data && attributes.image.data.attributes.formats.medium.url;
-
+  
   return (
     <Layout title="Single event">
       <div className={styles.event}>
         <div className={styles.controls}>
-          <Link href={`/events/edit/${attributes.id}`}>
+          <Link href={`/events/edit/${id}`}>
             <a>
               <FaPencilAlt /> Edit Event
             </a>
@@ -78,8 +78,7 @@ export default function EventPage({ evt }) {
 
 // for Server-Side Rendering
 export async function getServerSideProps({query:{slug}}) {
-  console.log(slug);
-  const res = await fetch(`${API_URL}/api/events?filters[slug][$eq]=${slug}&populate=*`);
+const res = await fetch(`${API_URL}/api/events?filters[slug][$eq]=${slug}&populate=*`);
 const json = await res.json();
 const events = json.data;
   return {
