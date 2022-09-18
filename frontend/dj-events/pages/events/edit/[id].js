@@ -80,7 +80,7 @@ export default function EditEventPage({
   const imageUploaded = async () => {
     const res = await fetch(`${API_URL}/api/events/${id}?[populate]=*`);
     const json = await res.json();
-    const data = json.data
+    const data = json.data;
 
     setImagePreview(data.attributes.image.data ? data.attributes.image.data.attributes.formats.thumbnail.url : null);
     setShowModal(false);
@@ -158,9 +158,11 @@ export default function EditEventPage({
   );
 }
 
-export async function getServerSideProps({ params: { id } }) {
+export async function getServerSideProps({ params: { id }, req }) {
   const res = await fetch(`${API_URL}/api/events/${id}?[populate]=*`);
   const evt = await res.json();
+
+  console.log('cookie -->',req.headers.cookie)
 
   return {
     props: { evt },

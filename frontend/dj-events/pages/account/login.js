@@ -5,7 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Layout from "@/components/Layout";
 import styles from "@/styles/authForm.module.scss";
-import AuthContext from "@/context/auth";
+import AuthContext from "@/context/AuthContext";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,7 +15,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     error && toast.error(error);
-  });
+  }, [error]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
