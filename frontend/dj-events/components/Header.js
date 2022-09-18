@@ -2,11 +2,13 @@ import Link from "next/link";
 import styles from "@/styles/header.module.scss";
 import Search from "./Search";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
-import AuthContext from "@/context/auth";
+import AuthContext from "@/context/AuthContext";
 import { useContext } from "react";
 
 export default function Header() {
   const { user, logout } = useContext(AuthContext);
+
+  console.log('header check user', user)
 
   return (
     <header className={styles.header}>

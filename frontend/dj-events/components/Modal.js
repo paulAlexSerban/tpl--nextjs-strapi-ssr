@@ -5,12 +5,14 @@ import { FaTimes } from "react-icons/fa";
 
 export default function Modal({ show, onClose, children, title }) {
   const [isBrowser, setIsBrowser] = useState(false);
-  useEffect(() => setIsBrowser(true));
+  useEffect(() => {
+    setIsBrowser(true);
+  }, [isBrowser]);
 
   const handleClose = (e) => {
     e.preventDefault();
     onClose();
-  }
+  };
 
   const modalContent = show ? (
     <div className={styles.overlay}>
@@ -34,7 +36,6 @@ export default function Modal({ show, onClose, children, title }) {
     return null;
   }
 }
-
 
 /**
  * @read_more about modals in next.js
