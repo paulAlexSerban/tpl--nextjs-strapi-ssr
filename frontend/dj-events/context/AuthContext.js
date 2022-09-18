@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       setUser(userData);
-      router.push('/account/dashboard')
+      router.push("/account/dashboard");
     } else {
       setError(json.data.message);
       setError(null);
@@ -48,7 +48,14 @@ export const AuthProvider = ({ children }) => {
    * @name logout-user
    */
   const logout = async () => {
-    console.log("logout");
+    const res = await fetch(`${NEXT_URL}/api/logout`, {
+      method: "POST",
+    });
+
+    if (res.ok) {
+      setUser(null);
+      router.push("/");
+    }
   };
 
   useEffect(() => {
@@ -63,10 +70,9 @@ export const AuthProvider = ({ children }) => {
     const res = await fetch(`${NEXT_URL}/api/user`);
     const data = await res.json();
 
-    console.log('checkUserLoggedIn data', data)
+    console.log("checkUserLoggedIn data", data);
 
     if (res.ok) {
-      
       setUser(data);
     } else {
       setUser(null);
