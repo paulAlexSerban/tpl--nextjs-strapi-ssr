@@ -10,16 +10,27 @@ export const AuthProvider = ({ children }) => {
 
   const router = useRouter();
 
-  /**
-   * @name register-user
-   */
-  const register = async ({ username, email, password }) => {
-    console.log({ username, email, password });
+  // register
+  const register = async (user) => {
+    const res = await fetch(`${NEXT_URL}/api/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.user) {
+      setUser(data.user);
+      router.push("/account/dashboard");
+    } else {
+      setError(data.data.message);
+    }
   };
 
-  /**
-   * @name login
-   */
+  // login
   const login = async ({ email: identifier, password }) => {
     const res = await fetch(`${NEXT_URL}/api/login`, {
       method: "POST",
@@ -40,37 +51,29 @@ export const AuthProvider = ({ children }) => {
       router.push("/account/dashboard");
     } else {
       setError(json.data.message);
-      setError(null);
+      setTimeout(() => {setError(null)}, 400);
     }
   };
 
-  /**
-   * @name logout-user
-   */
+  // logout
   const logout = async () => {
     const res = await fetch(`${NEXT_URL}/api/logout`, {
       method: "POST",
     });
 
     if (res.ok) {
-      setUser(null);
-      router.push("/");
+      setUser(null);      
+      setTimeout(() => {router.push("/")}, 400); /* 1 */
     }
   };
 
   useEffect(() => {
-    checkUserLoggedIn();
+    checkUserLoggedIn(user);
   }, []);
 
-  /**
-   * @warning useEffect infinite look
-   * setUser(string)
-   */
   const checkUserLoggedIn = async (user) => {
     const res = await fetch(`${NEXT_URL}/api/user`);
     const data = await res.json();
-
-    console.log("checkUserLoggedIn data", data);
 
     if (res.ok) {
       setUser(data);
@@ -83,3 +86,7 @@ export const AuthProvider = ({ children }) => {
 };
 
 export default AuthContext;
+
+/**
+ * 1. https://stackoverflow.com/questions/65706201/what-is-the-cause-of-loading-initial-props-cancelled-in-nextjs
+ */

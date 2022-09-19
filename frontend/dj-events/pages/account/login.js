@@ -32,12 +32,12 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email">Email Address</label>
-            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="on"/>
           </div>
 
           <div>
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="on"/>
           </div>
 
           <input type="submit" value="Login" className="btn" />

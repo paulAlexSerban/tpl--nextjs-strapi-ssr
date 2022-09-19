@@ -10,8 +10,6 @@ export default async (req, res) => {
 
     const { token } = cookie.parse(req.headers.cookie);
 
-    console.log("user.js/token -> ", token);
-
     const strapiRes = await fetch(`${API_URL}/api/users/me`, {
       method: "GET",
       headers: {
@@ -22,7 +20,6 @@ export default async (req, res) => {
     const user = await strapiRes.json();
 
     if (strapiRes.ok) {
-      console.log("user.js/test", { user });
       res.status(200).json(user);
     } else {
       res.status(403).json({ message: "User forbidden" });

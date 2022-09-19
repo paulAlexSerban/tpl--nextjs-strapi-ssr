@@ -8,8 +8,6 @@ import { useContext } from "react";
 export default function Header() {
   const { user, logout } = useContext(AuthContext);
 
-  console.log('header check user', user)
-
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
