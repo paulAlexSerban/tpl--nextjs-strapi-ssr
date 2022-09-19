@@ -5,7 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Layout from "@/components/Layout";
 import styles from "@/styles/authForm.module.scss";
-import AuthContext from "@/context/auth";
+import AuthContext from "@/context/AuthContext";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -15,11 +15,15 @@ export default function RegisterPage() {
 
   const {register, error} = useContext(AuthContext);
 
+  useEffect(() => {
+    error && toast.error(error);
+  }, [error])
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if(password !==  passwordConfirm) {
-      toast.error('Passwords do not match');
+      toast.error('Passwords should not match');
       return;
     } else {
       register({ username, email, password });
@@ -36,17 +40,17 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="on" />
           </div>
 
           <div>
             <label htmlFor="email">Email Address</label>
-            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="on" />
           </div>
 
           <div>
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="on" />
           </div>
 
           <div>
@@ -56,6 +60,7 @@ export default function RegisterPage() {
               id="passwordConfirm"
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
+              autoComplete="on"
             />
           </div>
 
