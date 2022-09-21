@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"ERROR: no test specified\"",
     "lint": "echo \"ERROR: no lint script created\"",
-    "install:ci": "npm ci --omit=dev --ignore-scripts"
+    "install:ci": "npm ci --omit=dev --ignore-scripts",
+    "develop:fe": "bash scripts/frontend-dj-events-dev.bash",
+    "develop:be": "bash scripts/backend-dj-events-dev.bash"
   },
   "repository": {
     "type": "git",
