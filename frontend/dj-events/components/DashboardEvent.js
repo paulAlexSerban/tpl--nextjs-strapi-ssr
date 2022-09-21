@@ -16,7 +16,7 @@ export default function DashboardEvent({ evt, handleDelete }) {
         </a>
       </Link>
       <a href="#" className={styles.delete} onClick={() => handleDelete(evt.id)}>
-        <FaPencilAlt /> <span>Delete Event</span>
+        <FaTimes /> <span>Delete Event</span>
       </a>
     </div>
   );

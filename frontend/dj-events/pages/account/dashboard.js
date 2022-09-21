@@ -16,8 +16,9 @@ export default function DashboardPage({ events }) {
       <div className={styles.dash}>
         <h1>Dashboard</h1>
         <h3>My Events</h3>
-        {events.map((evt) => (
-          <DashboardEvent key={evt.id} evt={evt} handleDelete={deleteEvent} />
+        {console.log(events)}
+        {events.data.attributes.data.map((evt) => (
+          <DashboardEvent key={evt.id} evt={evt.attributes} handleDelete={deleteEvent} />
         ))}
       </div>
     </Layout>
