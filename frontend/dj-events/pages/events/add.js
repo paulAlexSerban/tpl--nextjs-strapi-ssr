@@ -13,7 +13,7 @@ import { parseCookies } from "@/helpers/index";
  * @type: Page
  */
 
-export default function AddEventPage() {
+export default function AddEventPage({ token }) {
   const [values, setValues] = useState({
     name: "",
     performers: "",
@@ -40,6 +40,7 @@ export default function AddEventPage() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ data: values }),
     });
@@ -52,7 +53,7 @@ export default function AddEventPage() {
       toast.error("Something Went Wrong");
     } else {
       const evt = await res.json();
-      const slug = evt.data.attributes.slug;
+      const slug = evt.slug;
       router.push(`/events/${slug}`);
     }
   };
@@ -118,12 +119,12 @@ export default function AddEventPage() {
   );
 }
 
-// export async function getServerSideProps({ req }) {
-//   const { token } = parseCookies(req)
+export async function getServerSideProps({ req }) {
+  const { token } = parseCookies(req);
 
-//   return {
-//     props: {
-//       token,
-//     },
-//   }
-// }
+  return {
+    props: {
+      token,
+    },
+  };
+}
