@@ -8,10 +8,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { parseCookies } from "@/helpers/index";
 import { format } from "date-fns";
-import Image from 'next/image';
-import {FaImage} from 'react-icons/fa';
-import Modal from '@/components/Modal';
-import ImageUpload from '@/components/ImageUpload';
+import Image from "next/image";
+import { FaImage } from "react-icons/fa";
+import Modal from "@/components/Modal";
+import ImageUpload from "@/components/ImageUpload";
 /**
  * @name: Add Event
  * @type: Page
@@ -22,8 +22,8 @@ export default function EditEventPage({
     data: { id },
     data: { attributes },
   },
+  token
 }) {
-
   // States
   const [values, setValues] = useState({
     name: attributes.name,
@@ -35,8 +35,10 @@ export default function EditEventPage({
     description: attributes.description,
   });
 
-  const [imagePreview, setImagePreview] = useState(attributes.image.data ? attributes.image.data.attributes.formats.thumbnail.url : null )
-  const [showModal, setShowModal] = useState(false)
+  const [imagePreview, setImagePreview] = useState(
+    attributes.image.data ? attributes.image.data.attributes.formats.thumbnail.url : null
+  );
+  const [showModal, setShowModal] = useState(false);
 
   const router = useRouter();
 
@@ -54,6 +56,7 @@ export default function EditEventPage({
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ data: values }),
     });
@@ -84,7 +87,7 @@ export default function EditEventPage({
 
     setImagePreview(data.attributes.image.data ? data.attributes.image.data.attributes.formats.thumbnail.url : null);
     setShowModal(false);
-  }
+  };
 
   return (
     <Layout title="Edit Event">
@@ -140,10 +143,12 @@ export default function EditEventPage({
       </form>
       <h2>Event Image</h2>
       {imagePreview ? (
-        <Image src={imagePreview} height={100} width={170}/>
-      ) : <div>
-        <p>No image uploaded</p>
-      </div>}
+        <Image src={imagePreview} height={100} width={170} />
+      ) : (
+        <div>
+          <p>No image uploaded</p>
+        </div>
+      )}
 
       <div>
         <button className="btn-secondary" onClick={() => setShowModal(true)}>
@@ -152,7 +157,7 @@ export default function EditEventPage({
       </div>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload evtId={id}  imageUploaded={imageUploaded}/>
+        <ImageUpload evtId={id} imageUploaded={imageUploaded} token={token} />
       </Modal>
     </Layout>
   );
@@ -161,8 +166,9 @@ export default function EditEventPage({
 export async function getServerSideProps({ params: { id }, req }) {
   const res = await fetch(`${API_URL}/api/events/${id}?[populate]=*`);
   const evt = await res.json();
+  const { token } = parseCookies(req);
 
   return {
-    props: { evt },
+    props: { evt, token },
   };
 }
