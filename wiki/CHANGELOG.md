@@ -1,3 +1,22 @@
+# [1.2.0](https://github.com/paulAlexSerban/tpl--nextjs-ssr/compare/v1.1.0...v1.2.0) (2022-09-21)
+
+
+### Features
+
+* **api endpoints:** addjust CRUD frunctions for events ([deecd56](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/deecd56053b557b497e6d071b3c52b3e8943ceb2))
+* **backend:** add modal component ([50403e2](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/50403e2041f460829f6acfc2fa5342d8ea1c32fb))
+* complete CRUD functionaloties ([fb86534](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/fb86534a6edcb0edde11d3397cb95c062a00e39c))
+* **cookies:** use cookies to persist login ([c1f0b49](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/c1f0b49838833fdcb70a8e9a8e589c22d58337e7))
+* **dashboard:** display user events ([76a1632](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/76a1632a8ddb8f2601a7a764c97e1a189d8497eb))
+* **events endpoint:** add user event endpoint ([cc0c778](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/cc0c77877ed141350c0e17f8599fb44fd20b551a))
+* **events:** get events on dashboard ([e3b9ef8](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/e3b9ef8d4e3aaf39715e2b09c0c64b6371f7f1d6))
+* **image-upload:** implement image upload ([bb14988](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/bb149889e6b311ceda1422be00eea1a9e5946f20))
+* **jwt:** add jwt authentification ([007f716](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/007f7163199a3be94f89cadb293bf14091433778))
+* **login-register:** add login and register pages ([89f33d3](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/89f33d36ce790a77fe0d3bc9a5223a70d1f795c8))
+* **logout:** implement logout functionality ([1cc7028](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/1cc702861b44aa42af9e61d85d00999d2948b1cb))
+* **pagination:** add events page pagination ([a28af29](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/a28af296551a73df863c638695aab16de76b695c))
+* **register-user:** add register user logic ([5876ce2](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/5876ce272916112761b210d83c4af2c15cfedaf5))
+
 # [1.1.0](https://github.com/paulAlexSerban/tpl--nextjs-ssr/compare/v1.0.0...v1.1.0) (2022-09-16)
 
 
