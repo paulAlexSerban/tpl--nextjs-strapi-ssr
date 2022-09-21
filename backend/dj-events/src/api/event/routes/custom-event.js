@@ -4,13 +4,14 @@
  * custom router.
  */
 
-module.exports = {
+
+
+ module.exports = {
   routes: [
-    {
-      method: "GET",
-      path: "/events/me",
-      handler: "event.me",
-      config: {},
-    },
-  ],
-};
+    { // Path defined with a URL parameter
+      method: 'GET',
+      path: '/events/me',
+      handler: 'event.me',
+    }
+  ]
+}
