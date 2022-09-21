@@ -5,7 +5,7 @@
 
 ## Architecture
 - FE: Next.js, Scss
-- BE: Strapi CMS
+- BE: Strapi (Headless CMS)
 - Database: SQl (SQL Lite and PosgresSQL)
   - Local development - SQLite
   - Remote - PostgrsSQL
