@@ -16,17 +16,16 @@
      // Push any additional query params to the array
      populateList.push(ctx.query.populate)
      ctx.query.populate = populateList.join(',')
-     // console.log(ctx.query)
      const content = await super.find(ctx)
      return content
    },
  
    // Create user event----------------------------------------
    async create(ctx) {
-     let entity;
-     ctx.request.body.data.user = ctx.state.user;
-     entity = await super.create(ctx);
-     return entity;
+    let entity;
+    ctx.request.body.data.user = ctx.state.user;
+    entity = await strapi.service("api::event.event").create(ctx.request.body);
+    return entity;
    },
    // Update user event----------------------------------------
    async update(ctx) {
@@ -39,7 +38,6 @@
        }
      };
      const events = await this.find({query: query});
-     console.log(events);
      if (!events.data || !events.data.length) {
        return ctx.unauthorized(`You can't update this entry`);
      }
