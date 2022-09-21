@@ -1,12 +1,14 @@
 {
   "name": "tpl--nextjs",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "## Read more: - [Next.js Website](https://nextjs.org/)",
   "main": "commitlint.config.js",
   "scripts": {
     "test": "echo \"ERROR: no test specified\"",
     "lint": "echo \"ERROR: no lint script created\"",
-    "install:ci": "npm ci --omit=dev --ignore-scripts"
+    "install:ci": "npm ci --omit=dev --ignore-scripts",
+    "develop:fe": "bash scripts/frontend-dj-events-dev.bash",
+    "develop:be": "bash scripts/backend-dj-events-dev.bash"
   },
   "repository": {
     "type": "git",
