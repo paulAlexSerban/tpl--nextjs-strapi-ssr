@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/paulAlexSerban/tpl--nextjs-ssr/compare/v1.0.1...v1.1.0) (2022-09-22)
+
+
+### Features
+
+* **cd:** add packge-backend-script ([e6d86ba](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/e6d86ba48cd775971506687b8071f847d066466a))
+
 ## [1.0.1](https://github.com/paulAlexSerban/tpl--nextjs-ssr/compare/v1.0.0...v1.0.1) (2022-09-22)
 
 
