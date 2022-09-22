@@ -1,0 +1,19 @@
+name: Package Backend DJ Events - Strapi CMS
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Package DJ Events
+    runs-on: ubuntu-latest
+    steps:
+      - name: "📥 checkout repository"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: "🚚  Package Backend/DJ Events"
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: package-backend-dj-events
+          folder: backend/dj-events
