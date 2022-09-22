@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/paulAlexSerban/tpl--nextjs-ssr/compare/v1.0.0...v1.0.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* **scripts:** fix typos in install scripts ([0939db5](https://github.com/paulAlexSerban/tpl--nextjs-ssr/commit/0939db59b78c613b3a9fe53d4a90492addd393e9))
+
 # 1.0.0 (2022-09-22)
 
 
