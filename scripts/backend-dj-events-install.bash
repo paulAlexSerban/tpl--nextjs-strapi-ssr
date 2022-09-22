@@ -3,7 +3,7 @@
 cd "$(dirname "$0")" || exit
 
 echo "🛑  Cleaning Backend DJ Events node_modules"
-rm -rfv ../bakcend/dj-events/node_modules
+rm -rfv ../backend/dj-events/node_modules
 
 echo "🔧  Installing Backend DJ Events"
-npm --prefix ../bakcend/dj-events install
+npm --prefix ../backend/dj-events install
